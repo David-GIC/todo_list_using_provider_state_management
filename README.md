@@ -2,6 +2,7 @@
 
 - List down tasks to do
 - Using provider state management
+- Add task
 - OnLongPress on item to delete task
 - Linethrogh on text
 
