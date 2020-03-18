@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:todoey/provider/task.dart';
 import 'package:todoey/screens/widget/task_tile.dart';
-import 'package:todoey/utils/widget/action_sheet.dart';
 
 class TaskList extends StatelessWidget {
   @override
