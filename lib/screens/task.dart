@@ -2,9 +2,9 @@ import 'package:badges/badges.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:todoey/models/task.dart';
 import 'package:todoey/provider/task.dart';
 import 'package:todoey/screens/add_task.dart';
+import 'package:todoey/screens/done_task.dart';
 import 'package:todoey/screens/widget/task_list.dart';
 
 class TaskScreen extends StatelessWidget {
@@ -49,18 +49,21 @@ class TaskScreen extends StatelessWidget {
                           radius: 30,
                         ),
                         SizedBox(height: 10.0,),
-                        Text("Todoey", style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 50),),
+                        Text("Todo-ey", style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 50),),
                         Text("${_taskProvider.taskCount} Tasks", style: TextStyle(color: Colors.white, fontSize: 18),),
                       ],
                     ),
                     _taskProvider.doneTaskCount == 0 ? Icon(Icons.notifications, color: Colors.white,) : Badge(
                       badgeColor: Colors.red,
                       badgeContent: Text("${_taskProvider.doneTaskCount}", style: TextStyle(color: Colors.white),),
-                      child: Icon(Icons.notifications, color: Colors.white,),
+                      child: GestureDetector(
+                              child: Icon(Icons.notifications, color: Colors.white,),
+                              onTap: () => Navigator.push(context, MaterialPageRoute(builder: (_) => DoneTasks())),
+                      ),
                     ),
                   ],
                 ),
-                ),
+            ),
             Expanded(
               child: Container(
                 height: _deviceHeight,
@@ -70,7 +73,7 @@ class TaskScreen extends StatelessWidget {
                   borderRadius: BorderRadius.only(
                     topLeft: Radius.circular(20.0),
                     topRight: Radius.circular(20.0)
-                  )
+                  ),
                 ),
                 child: TaskList()
               ),

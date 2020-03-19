@@ -2,6 +2,7 @@ import 'package:flutter/foundation.dart';
 import 'package:todoey/models/task.dart';
 
 class TaskProvider extends ChangeNotifier {
+
   List<Task> _tasks = [
     Task(name: "Complete Mock up design", isDone: true),
     Task(name: "Implement Static UI", isDone: false),
@@ -10,7 +11,7 @@ class TaskProvider extends ChangeNotifier {
     Task(name: "Defense Thesic", isDone: false),
   ];
 
-  int _countDoneTask = 0;
+  int _countDoneTask = 1;
 
   get taskList => _tasks;
   get taskCount => _tasks.length;

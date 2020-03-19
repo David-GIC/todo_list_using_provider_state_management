@@ -8,13 +8,13 @@ void main() => runApp(MyApp());
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: MultiProvider(
-        providers: [
-          ListenableProvider<TaskProvider>(create: (_) => TaskProvider()),
-        ],
-        child: TaskScreen(),
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider<TaskProvider>(create: (_) => TaskProvider()),
+      ],
+      child: MaterialApp(
+        debugShowCheckedModeBanner: false,
+        home: TaskScreen(),
       ),
     );
   }

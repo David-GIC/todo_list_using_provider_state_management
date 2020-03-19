@@ -9,5 +9,4 @@ class Task {
     isDone = !isDone;
     return isDone;
   }
-
 }

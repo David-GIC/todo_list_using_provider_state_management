@@ -8,28 +8,33 @@ class TaskList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final TaskProvider _taskProvider = Provider.of<TaskProvider>(context);
-//    Consumer<TaskProvider>(
-//        builder: (context, _taskProvider, child) {
-//      return
-    return Scrollbar(
-      child: ListView.builder(
-          itemCount: _taskProvider.taskList.length,
-          itemBuilder: (context, index) {
-            var task = _taskProvider.taskList[index];
-            return TaskTile(
-              taskTitle: _taskProvider.taskList[index].name,
-              isChecked: _taskProvider.taskList[index].isDone,
-              checkBoxCallback: (checkBoxState) {
-                _taskProvider.updateTask(task);
-              },
-              deleteBoxCallback: () => showCupertinoModalPopup(
-                  context: context,
-                  builder: (context) =>
-                      _buildActionSheet(context, _taskProvider, index)),
-            );
-          }),
-    );
-//      });
+    if(_taskProvider.taskCount > 0){
+      return Consumer<TaskProvider>(
+        builder: (context, _taskProvider, child){
+          return Scrollbar(
+            child: ListView.builder(
+                itemCount: _taskProvider.taskList.length,
+                itemBuilder: (context, index) {
+                  var task = _taskProvider.taskList[index];
+                  return TaskTile(
+                    taskTitle: _taskProvider.taskList[index].name,
+                    isChecked: _taskProvider.taskList[index].isDone,
+                    checkBoxCallback: (checkBoxState) {
+                      _taskProvider.updateTask(task);
+                    },
+                    deleteBoxCallback: () => showCupertinoModalPopup(
+                        context: context,
+                        builder: (context) =>
+                            _buildActionSheet(context, _taskProvider, index)
+                    ),
+                  );
+                }),
+          );
+        },
+      );
+    }else{
+      return CircularProgressIndicator();
+    }
   }
 
   Widget _buildActionSheet(
