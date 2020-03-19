@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:todoey/models/task.dart';
 import 'package:todoey/provider/task.dart';
 import 'package:todoey/screens/widget/task_tile.dart';
 
@@ -25,7 +26,7 @@ class TaskList extends StatelessWidget {
                     deleteBoxCallback: () => showCupertinoModalPopup(
                         context: context,
                         builder: (context) =>
-                            _buildActionSheet(context, _taskProvider, index)
+                            _buildActionSheet(context, _taskProvider, index, _taskProvider.taskList[index])
                     ),
                   );
                 }),
@@ -38,7 +39,7 @@ class TaskList extends StatelessWidget {
   }
 
   Widget _buildActionSheet(
-      BuildContext context, TaskProvider _taskProvider, int index) {
+      BuildContext context, TaskProvider _taskProvider, int index, Task task) {
     return CupertinoActionSheet(
       title: Text("Do you really want to delete it?"),
       actions: <Widget>[
@@ -46,7 +47,7 @@ class TaskList extends StatelessWidget {
           child: Text("Delete"),
           isDestructiveAction: true,
           onPressed: () {
-            _taskProvider.deleteTask(index);
+            _taskProvider.deleteTask(index, task);
             Navigator.pop(context);
           },
         ),

@@ -23,8 +23,11 @@ class TaskProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  void deleteTask(int index) {
+  void deleteTask(int index, Task task) {
     _tasks.removeAt(index);
+    if(task.isDone){
+      decrementDoneTask();
+    }
     notifyListeners();
   }
 

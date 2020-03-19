@@ -18,10 +18,14 @@ class DoneTasks extends StatelessWidget {
         child: ListView.builder(
             itemCount: taskProvider.taskList.length,
             itemBuilder: (context, index) {
-              return TaskTile(
-                taskTitle: taskProvider.taskList[index].name,
-                isChecked: taskProvider.taskList[index].isDone,
-              );
+              if(taskProvider.taskList[index].isDone){
+                return TaskTile(
+                  taskTitle: taskProvider.taskList[index].name,
+                  isChecked: taskProvider.taskList[index].isDone,
+                );
+              }else{
+                return Container();
+              }
             }
         ),
       ),
